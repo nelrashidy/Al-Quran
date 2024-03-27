@@ -41,10 +41,45 @@ export class QuranComponent implements OnInit {
     this.quranService.getOneReciter(this.selectedReciterId).subscribe({
       next: (res: any) => {
         console.log(res, 'one reciter');
+        this.suwar=[];
         this.selectedReciterMoshaf = res?.reciters[0]?.moshaf;
         console.log(this.selectedReciterMoshaf, 'selectedReciterMoshaf');
       },
     });
   }
-  
+
+  onMoshafSelected(event: any): void {
+    const selectedOption = event.target.selectedOptions[0];
+    const surahList = selectedOption.getAttribute('data-surah_list');
+    this.getAllSuwarData(surahList);
+  }
+
+  getAllSuwarData(surah_list: any): void {
+    this.selectedReciterMoshaf.forEach((moshaf: any) => {
+      const server = moshaf.server;
+      this.quranService.getAllSuwar().subscribe({
+        next: (res: any): void => {
+          this.suwarIds = surah_list.split(',');
+          res.suwar.forEach((surah: any) => {
+            if (this.suwarIds.includes(surah.id.toString())) {
+              this.suwar.push({
+                id: String(surah.id).padStart(3, '0'),
+                name: surah.name,
+                server: server,
+              });
+            }
+          });
+
+          console.log(server, 'severrrrrr');
+        },
+        error: (error: any): void => {
+          console.log(error);
+        },
+      });
+    });
+  }
+
+  selectedSuarh(event: any) {
+    console.log(event.target.value, 'selectedSurah');
+  }
 }
