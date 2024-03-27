@@ -1,1 +1,47 @@
-<p>quran works!</p>
+<div class="row" dir="rtl">
+  <div class="col-4">
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      [(ngModel)]="selectedReciterId"
+      (change)="getOneReciterData()"
+    >
+      @for (reciter of reciters; track reciter.id) {
+      <option [value]="reciter.id">
+        {{ reciter.name }}
+      </option>
+      }
+    </select>
+  </div>
+  <!-- <div class="col-4">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          (change)="onMoshafSelected($event)"
+          [(ngModel)]="selectedOneMoshaf"
+        >
+          <option
+            *ngFor="let moshaf of selectedMoshaf"
+            [value]="moshaf.id"
+            [attr.data-server]="moshaf.server"
+            [attr.data-surah_list]="moshaf.surah_list"
+          >
+            {{ moshaf.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          (change)="selectedSuarh($event)"
+        >
+          <option
+            *ngFor="let sura of suwar"
+            value="{{ sura.server }}{{ sura.id }}.mp3"
+          >
+            {{ sura.name }}
+          </option>
+        </select>
+      </div> -->
+</div>
