@@ -13,24 +13,20 @@
       }
     </select>
   </div>
+  <div class="col-4">
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      [(ngModel)]="selectedOneMoshaf"
+    >
+      @for (moshaf of selectedReciterMoshaf; track moshaf.id) {
+      <option [value]="moshaf.id" [attr.data-server]="moshaf.server" [attr.data-surah_list]="moshaf.surah_list">
+        {{ moshaf.name }}
+      </option>
+      }
+    </select>
+  </div>
   <!-- <div class="col-4">
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          (change)="onMoshafSelected($event)"
-          [(ngModel)]="selectedOneMoshaf"
-        >
-          <option
-            *ngFor="let moshaf of selectedMoshaf"
-            [value]="moshaf.id"
-            [attr.data-server]="moshaf.server"
-            [attr.data-surah_list]="moshaf.surah_list"
-          >
-            {{ moshaf.name }}
-          </option>
-        </select>
-      </div>
-      <div class="col-4">
         <select
           class="form-select"
           aria-label="Default select example"
@@ -43,5 +39,5 @@
             {{ sura.name }}
           </option>
         </select>
-      </div> -->
+      </div>  -->
 </div>
