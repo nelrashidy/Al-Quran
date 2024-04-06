@@ -1,0 +1,20 @@
+header {
+  height: 100vh;
+  background: url('/assets/images/5540822.jpg');
+}
+header h1 {
+  font-size: max(40px, min(3.4vw, 66px));
+
+}
+
+header h3 {
+  font-size: max(24px, min(2.3vw, 40px));
+}
+
+header p {
+  font-size: max(17px, min(1.3vw, 26px));
+}
+
+header button {
+  font-size: max(17px, min(1.3157894737vw, 20px));
+}

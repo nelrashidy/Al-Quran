@@ -1,5 +1,5 @@
 <footer>
-  <section class="footer-top">
+  <section class="footer-top py-4">
     <div class="container">
       <div class="row justify-content-between">
         <div class="col-lg-5">
@@ -22,14 +22,11 @@
         <div class="col-lg-2">
             <h5 class="mt-lg-3">الروابط المفيدة</h5>
             <ul>
-                  <li><a href="#">الصفحة الرئيسية</a></li>
-                  <li><a href="#">قراءة القرآن</a></li>
-                  <li><a href="#">الإستماع إلى القرآن</a></li>
-                  <li><a href="#">مواقيت الصلاة</a></li>
-                  <li><a href="#">الأذكار</a></li>
-
-
-
+                  <li><a [routerLink]="['/home']">الصفحة الرئيسية</a></li>
+                  <li><a [routerLink]="['/mushaf']">قراءة القرآن</a></li>
+                  <li><a [routerLink]="['/reciters']">الإستماع إلى القرآن</a></li>
+                  <li><a [routerLink]="['/prayer-times']">مواقيت الصلاة</a></li>
+                  <li><a [routerLink]="['/adhkar']">الأذكار</a></li>
             </ul>
         </div>
         <div class="col-lg-4"></div>

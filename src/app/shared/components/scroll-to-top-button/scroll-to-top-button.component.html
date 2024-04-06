@@ -1,1 +1,9 @@
-<p>scroll-to-top-button works!</p>
+<div
+  class="to-top"
+  (click)="scrollToTop()"
+  [ngClass]="{ 'show-scrollTop': windowScrolled }"
+>
+  <span class="scroll-button d-flex justify-content-center align-items-center rounded-3">
+    <i class="fa-solid fa-chevron-up text-center"></i>
+  </span>
+</div>
