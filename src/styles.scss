@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Almarai";
+  src: url("assets/fonts/Almarai-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: "Almarai", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7rem;
+}
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
