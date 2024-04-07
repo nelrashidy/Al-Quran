@@ -11,13 +11,25 @@ export function app(): express.Express {
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
+
   const domino = require('domino');
   const fs = require('fs');
-  const template = fs.readFileSync(join(browserDistFolder, indexHtml)).toString();
-  const win = domino.createWindow(template);
-  global['window'] = win;
-  global['document'] = win.document;
-  global['navigator'] = win.navigator;
+  const path = require('path');
+
+  // Use the browser index.html as a template for the mock window
+  const template = fs
+    .readFileSync(
+      path.join(
+        join(process.cwd(), 'dist/yourprojectname/browser'),
+        'index.html'
+      )
+    )
+    .toString();
+
+  // Shim for the global window and document objects.
+  const window = domino.createWindow(template);
+  global['window'] = window;
+  global['document'] = window.document;
 
   const commonEngine = new CommonEngine();
 
