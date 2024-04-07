@@ -1,1 +1,31 @@
-<p>prayers works!</p>
+<section id="prayersCalender">
+  <div class="container table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Fajr</th>
+            <th scope="col">Sunrise</th>
+            <th scope="col">Dhuhr</th>
+            <th scope="col">Asr</th>
+            <th scope="col">Maghrib</th>
+            <th scope="col">Isha</th>
+        </tr>
+      </thead>
+      <tbody>
+            @for(prayers of PrayerTimesCalender ; track prayers.id){
+                  <tr>
+                        <td>{{ prayers.date.gregorian.date }}</td>
+                        <td>{{ prayers.timings.Fajr }}</td>
+                        <td>{{ prayers.timings.Sunrise }}</td>
+                        <td>{{ prayers.timings.Dhuhr }}</td>
+                        <td>{{ prayers.timings.Asr }}</td>
+                        <td>{{ prayers.timings.Maghrib }}</td>
+                        <td>{{ prayers.timings.Isha }}</td>
+                    </tr>
+            }
+
+      </tbody>
+    </table>
+  </div>
+</section>
