@@ -1,14 +1,13 @@
-<div class="service-card">
+<div class="service-card py-4 rounded-2" style="background-color: red">
   <div class="row justify-content-center align-items-center text-center">
     <div class="col-12">
       <div class="img-container">
-        <img src="assets/images/quran.png" alt="" />
+        <img [src]="imageUrl" [alt]="title" loading="lazy" />
       </div>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad perferendis
-        repellat assumenda ipsam magni aperiam id! Fugiat obcaecati adipisci
-        veritatis.
-      </p>
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <h4>{{ title }}</h4>
+        <i class="fa-solid fa-arrow-left-long me-3"></i>
+      </div>
     </div>
   </div>
 </div>
