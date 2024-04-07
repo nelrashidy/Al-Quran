@@ -8,28 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class QuranService {
   constructor(private http: HttpClient) {}
-  baseUrl: string = environment.baseUrl;
-  baseUrl2: string = environment.baseUrl2;
+  RecitersBaseUrl: string = environment.RecitersBaseUrl;
+  MushafBaseUrl: string = environment.MushafBaseUrl;
   language: string = 'ar';
 
   // Play Quran
   getAllReciters(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/reciters?language=${this.language}`);
+    return this.http.get(`${this.RecitersBaseUrl}/reciters?language=${this.language}`);
   }
   getOneReciter(reciterId: number): Observable<any> {
     return this.http.get(
-      `${this.baseUrl}/reciters?language=${this.language}&reciter=${reciterId}`
+      `${this.RecitersBaseUrl}/reciters?language=${this.language}&reciter=${reciterId}`
     );
   }
 
   getAllSuwar(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/suwar?language=${this.language}`);
+    return this.http.get(`${this.RecitersBaseUrl}/suwar?language=${this.language}`);
   }
 
   // Read Quran
 
   getChaptersList(){
-    return this.http.get(`${this.baseUrl2}/chapters`)
+    return this.http.get(`${this.MushafBaseUrl}/chapters`)
   }
 
 
