@@ -20,7 +20,6 @@
             "outputPath": "dist/al-quran",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "singleBundle": true,
             "polyfills": [
               "zone.js"
             ],
