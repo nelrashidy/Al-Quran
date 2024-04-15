@@ -12,7 +12,7 @@ export function app(): express.Express {
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
-  // const domino = require('domino');
+  const domino = require('domino');
   const fs = require('fs');
   const path = require('path');
 
@@ -27,7 +27,7 @@ export function app(): express.Express {
     .toString();
 
   // Shim for the global window and document objects.
-  // const window = domino.createWindow(template);
+  const window = domino.createWindow(template);
   global['window'] = window;
   global['document'] = window.document;
 
@@ -35,6 +35,10 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+
+  // Example Express Rest API endpoints
+  // server.get('/api/**', (req, res) => { });
+  // Serve static files from /browser
   server.get(
     '*.*',
     express.static(browserDistFolder, {
