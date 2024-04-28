@@ -1,0 +1,10 @@
+{
+  "routes": [
+    "/adhkar",
+    "/home",
+    "/mushaf",
+    "/prayer-times",
+    "/quran",
+    "/reciters"
+  ]
+}

@@ -3,21 +3,21 @@
     <table class="table">
       <thead>
         <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Fajr</th>
-            <th scope="col">Sunrise</th>
-            <th scope="col">Dhuhr</th>
-            <th scope="col">Asr</th>
-            <th scope="col">Maghrib</th>
-            <th scope="col">Isha</th>
+            <th scope="col">التاريخ</th>
+            <th scope="col">الشروق</th>
+            <th scope="col">الفجر</th>
+            <th scope="col">الظهر</th>
+            <th scope="col">العصر</th>
+            <th scope="col">المغرب</th>
+            <th scope="col">العشاء</th>
         </tr>
       </thead>
       <tbody>
             @for(prayers of PrayerTimesCalender ; track prayers.id){
                   <tr>
                         <td>{{ prayers.date.gregorian.date }}</td>
-                        <td>{{ prayers.timings.Fajr }}</td>
                         <td>{{ prayers.timings.Sunrise }}</td>
+                        <td>{{ prayers.timings.Fajr }}</td>
                         <td>{{ prayers.timings.Dhuhr }}</td>
                         <td>{{ prayers.timings.Asr }}</td>
                         <td>{{ prayers.timings.Maghrib }}</td>
