@@ -35,17 +35,22 @@ export class QuranService {
     return this.http.get(`${this.MushafBaseUrl}/chapters`);
   }
 
-  getPrayerTimesByCity(latitude: any, longitude: any) {
-    let params = new HttpParams();
-    params = params.append('latitude', latitude);
-    params = params.append('longitude', longitude);
-    return this.http.get(`${this.PrayersBaseUrl}/timings`, { params });
+  // getPrayerTimesByLocation(latitude: any, longitude: any) {
+  //   let params = new HttpParams();
+  //   params = params.append('latitude', latitude);
+  //   params = params.append('longitude', longitude);
+  //   return this.http.get(`${this.PrayersBaseUrl}/timings?language=${this.language}`, { params });
+  // }
+  getPrayerTimesByCity() {
+    return this.http.get(`${this.PrayersBaseUrl}/timingsByCity?city=cairo&country=Egypt&&language=${this.language}`);
   }
+
+
 
   getPrayerTimesCalenderByCity(latitude: any, longitude: any) {
     let params = new HttpParams();
     params = params.append('latitude', latitude);
     params = params.append('longitude', longitude);
-    return this.http.get(`${this.PrayersBaseUrl}/calendar`, { params });
+    return this.http.get(`${this.PrayersBaseUrl}/calendar?language=${this.language}`, { params });
   }
 }

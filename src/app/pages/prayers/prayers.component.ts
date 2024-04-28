@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuranService } from '../../core/services/quran.service';
 import { LocationService } from '../../core/services/location.service';
+import { DateInfo, TodayPrayers } from '../../core/models/prayers';
 
 @Component({
   selector: 'app-prayers',
@@ -24,7 +25,8 @@ export class PrayersComponent implements OnInit {
   latitude!: any;
   longitude!: any;
 
-  todayPrayerTimes: any[] = [];
+  todayPrayerTimes= {} as TodayPrayers;
+  todayDate = {} as DateInfo;
   PrayerTimesCalender: any[] = [];
 
   ngOnInit(): void {
@@ -44,36 +46,58 @@ export class PrayersComponent implements OnInit {
     });
   }
 
-  getPrayerTimes() {
-    if (this.latitude !== undefined && this.longitude !== undefined) {
-      this.quranService
-        .getPrayerTimesByCity(this.latitude, this.longitude)
-        .subscribe({
-          next: (res: any): void => {
-            console.log(res, 'day');
-            this.todayPrayerTimes = res?.data?.timings;
-            console.log(this.todayPrayerTimes);
-            this.findClosestPrayerTime();
+  // getPrayerTimes() {
+  //   if (this.latitude !== undefined && this.longitude !== undefined) {
+  //     this.quranService
+  //       .getPrayerTimesByLocation(this.latitude, this.longitude)
+  //       .subscribe({
+  //         next: (res: any): void => {
+  //           console.log(res, 'day');
+  //           this.todayPrayerTimes = res?.data?.timings;
+  //           console.log(this.todayPrayerTimes);
+  //           this.findClosestPrayerTime();
 
-          },
-          error: (error: any): void => {
-            console.log(error);
-          },
-        });
-    } else {
-      console.error('Latitude or longitude is undefined');
-    }
+  //         },
+  //         error: (error: any): void => {
+  //           console.log(error);
+  //         },
+  //       });
+  //   } else {
+  //     console.error('Latitude or longitude is undefined');
+  //   }
+  // }
+
+  getPrayerTimes() {
+    this.quranService.getPrayerTimesByCity().subscribe({
+      next: (res: any): void => {
+        console.log(res, 'day egypt');
+        this.todayPrayerTimes = res?.data?.timings;
+        this.todayDate = res?.data?.date;
+        console.log(this.todayPrayerTimes , 'todayPrayerTimes');
+        console.log(this.todayDate , 'date');
+
+        this.findClosestPrayerTime();
+      },
+      error: (error: any): void => {
+        console.log(error);
+      },
+    });
   }
 
   findClosestPrayerTime() {
     const currentTime = new Date();
-  
+
     // Convert the object into an array of key-value pairs
     const prayerTimesArray = Object.entries(this.todayPrayerTimes);
-  
+
     // Filter out the keys representing the primary prayers and convert them to Date objects
     const prayerTimes = prayerTimesArray
-      .filter(([key, value]) => !['Sunrise', 'Sunset', 'Midnight', 'Firstthird', 'Imsak'].includes(key))
+      .filter(
+        ([key, value]) =>
+          !['Sunrise', 'Sunset', 'Midnight', 'Firstthird', 'Imsak'].includes(
+            key
+          )
+      )
       .map(([key, value]) => {
         const timeParts = (value as string).split(':');
         const hours = parseInt(timeParts[0]);
@@ -82,24 +106,29 @@ export class PrayersComponent implements OnInit {
         prayerTime.setHours(hours, minutes, 0); // Set hours and minutes
         return { key, time: prayerTime };
       });
-  
+
     // Filter future prayer times
-    const futurePrayerTimes = prayerTimes.filter(prayer => prayer.time > currentTime);
-  
-    const closestPrayerTime = futurePrayerTimes.length > 0
-      ? futurePrayerTimes.reduce((closest, current) => {
-          const closestDiff = closest.time.getTime() - currentTime.getTime();
-          const currentDiff = current.time.getTime() - currentTime.getTime();
-          return Math.abs(currentDiff) < Math.abs(closestDiff) ? current : closest;
-        })
-      : prayerTimes[0];
-  
-    console.log('Closest prayer time:', closestPrayerTime.key, closestPrayerTime.time.toLocaleTimeString());
+    const futurePrayerTimes = prayerTimes.filter(
+      (prayer) => prayer.time > currentTime
+    );
+
+    const closestPrayerTime =
+      futurePrayerTimes.length > 0
+        ? futurePrayerTimes.reduce((closest, current) => {
+            const closestDiff = closest.time.getTime() - currentTime.getTime();
+            const currentDiff = current.time.getTime() - currentTime.getTime();
+            return Math.abs(currentDiff) < Math.abs(closestDiff)
+              ? current
+              : closest;
+          })
+        : prayerTimes[0];
+
+    console.log(
+      'Closest prayer time:',
+      closestPrayerTime.key,
+      closestPrayerTime.time.toLocaleTimeString()
+    );
   }
-  
-  
-  
-  
 
   getPrayerTimesCalender() {
     this.quranService

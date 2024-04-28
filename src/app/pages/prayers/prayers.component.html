@@ -1,30 +1,93 @@
-<section id="prayersCalender">
-  <div class="container table-responsive">
-    <table class="table">
+<section id="prayersToday" class="mb-2 py-2">
+  <div class="container rounded bg-danger p-2">
+    <div class="row">
+      <div class="col-12">
+        <h2>مواقيت الصلاة اليوم فى مصر</h2>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="row">
+          <div class="col-12">
+            <h3>{{ todayDate?.hijri?.weekday?.ar }}</h3>
+          </div>
+          <div class="col-12">
+            <p class="mb-0">{{ todayDate?.readable }}</p>
+          </div>
+          <div class="col-12">
+            <span>{{ todayDate?.hijri?.day }}</span>
+            <span>{{ todayDate?.hijri?.month?.ar }}</span>
+            <span>{{ todayDate?.hijri?.year }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="next-prayer"></div>
+      </div>
+    </div>
+    <div class="row align-items-center justify-content-around justify-content-md-evenly">
+      <div class="col-2 p-0">
+        <div class="prayer-box bg-warning rounded-2 text-center">
+          <p class="mb-0">الفجر</p>
+          <p>{{todayPrayerTimes?.Fajr}}</p>
+        </div>
+      </div>
+      
+      <div class="col-2 p-0">
+        <div class="prayer-box bg-warning rounded-2 text-center">
+          <p class="mb-0">الظهر</p>
+          <p>{{todayPrayerTimes?.Dhuhr}}</p>
+        </div>
+      </div>
+      
+      <div class="col-2 p-0">
+        <div class="prayer-box bg-warning rounded-2 text-center">
+          <p class="mb-0">العصر</p>
+          <p>{{todayPrayerTimes?.Asr}}</p>
+        </div>
+      </div>
+      
+      <div class="col-2 p-0">
+        <div class="prayer-box bg-warning rounded-2 text-center">
+          <p class="mb-0">المغرب</p>
+          <p>{{todayPrayerTimes?.Maghrib}}</p>
+        </div>
+      </div>
+      
+      <div class="col-2 p-0">
+        <div class="prayer-box bg-warning rounded-2 text-center">
+          <p class="mb-0">العشاء</p>
+          <p>{{todayPrayerTimes?.Isha}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prayersMonthCalender" class="">
+  <div class="container table-responsive rounded bg-danger p-2">
+    <table class="table mb-0">
       <thead>
         <tr>
-            <th scope="col">التاريخ</th>
-            <th scope="col">الشروق</th>
-            <th scope="col">الفجر</th>
-            <th scope="col">الظهر</th>
-            <th scope="col">العصر</th>
-            <th scope="col">المغرب</th>
-            <th scope="col">العشاء</th>
+          <th scope="col">التاريخ</th>
+          <th scope="col">الشروق</th>
+          <th scope="col">الفجر</th>
+          <th scope="col">الظهر</th>
+          <th scope="col">العصر</th>
+          <th scope="col">المغرب</th>
+          <th scope="col">العشاء</th>
         </tr>
       </thead>
       <tbody>
-            @for(prayers of PrayerTimesCalender ; track prayers.id){
-                  <tr>
-                        <td>{{ prayers.date.gregorian.date }}</td>
-                        <td>{{ prayers.timings.Sunrise }}</td>
-                        <td>{{ prayers.timings.Fajr }}</td>
-                        <td>{{ prayers.timings.Dhuhr }}</td>
-                        <td>{{ prayers.timings.Asr }}</td>
-                        <td>{{ prayers.timings.Maghrib }}</td>
-                        <td>{{ prayers.timings.Isha }}</td>
-                    </tr>
-            }
-
+        @for(prayers of PrayerTimesCalender ; track prayers.id){
+        <tr>
+          <td>{{ prayers.date.gregorian.date }}</td>
+          <td>{{ prayers.timings.Sunrise }}</td>
+          <td>{{ prayers.timings.Fajr }}</td>
+          <td>{{ prayers.timings.Dhuhr }}</td>
+          <td>{{ prayers.timings.Asr }}</td>
+          <td>{{ prayers.timings.Maghrib }}</td>
+          <td>{{ prayers.timings.Isha }}</td>
+        </tr>
+        }
       </tbody>
     </table>
   </div>
